@@ -117,24 +117,78 @@ var n,l,u,i,t,r,o={},f=[],e=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|z
 /*!*********************************!*\
   !*** ./typescript/demo-app.tsx ***!
   \*********************************/
-/*! no exports provided */
+/*! exports provided: DemoAppState */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DemoAppState", function() { return DemoAppState; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 /* harmony import */ var _demo_app_input_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo-app/input-options */ "./typescript/demo-app/input-options.tsx");
+/* harmony import */ var _demo_app_input_options_mirror__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-app/input-options-mirror */ "./typescript/demo-app/input-options-mirror.tsx");
+/* harmony import */ var _demo_app_no_state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-app/no-state */ "./typescript/demo-app/no-state.tsx");
+/* harmony import */ var _demo_app_provider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./demo-app/provider */ "./typescript/demo-app/provider.tsx");
+/* harmony import */ var _demo_app_save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./demo-app/save */ "./typescript/demo-app/save.tsx");
 
 
+
+
+
+
+// Data model representing the application state.
+class DemoAppState {
+    constructor() {
+        this.message = '';
+    }
+}
+/**
+ * Quote: The main value proposition of the unknown type: TypeScript won't let us perform arbitrary operations on
+ * values of type unknown. Instead, we have to perform some sort of type checking first to narrow the type of the value
+ * we're working with.
+ *
+ * @link https://mariusschulz.com/blog/the-unknown-type-in-typescript
+ */
 class DemoApp extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
-        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null,
-            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_options__WEBPACK_IMPORTED_MODULE_1__["InputOptions"], null)));
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_provider__WEBPACK_IMPORTED_MODULE_4__["DemoAppProvider"], null,
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_options__WEBPACK_IMPORTED_MODULE_1__["InputOptions"], null),
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_options_mirror__WEBPACK_IMPORTED_MODULE_2__["InputOptionsMirror"], null),
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_no_state__WEBPACK_IMPORTED_MODULE_3__["NoState"], null),
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_save__WEBPACK_IMPORTED_MODULE_5__["Save"], null)));
     }
 }
 const parent = document.getElementById('demo-app');
 const replace = parent.querySelector('div');
 Object(preact__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(DemoApp, null), parent, replace);
+
+
+/***/ }),
+
+/***/ "./typescript/demo-app/input-options-mirror.tsx":
+/*!******************************************************!*\
+  !*** ./typescript/demo-app/input-options-mirror.tsx ***!
+  \******************************************************/
+/*! exports provided: InputOptionsMirror */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputOptionsMirror", function() { return InputOptionsMirror; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
+
+
+class InputOptionsMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+    render() {
+        console.log('Render InputOptionsMirror');
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_1__["Consumer"], null, ({ message }) => {
+            console.log('Re-render InputOptionsMirror');
+            return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null,
+                "Entered options: ",
+                Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("em", null, message ? message : 'Empty')));
+        }));
+    }
+}
 
 
 /***/ }),
@@ -150,10 +204,110 @@ Object(preact__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(preact__WEBPACK_IMP
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputOptions", function() { return InputOptions; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
+
 
 class InputOptions extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
-        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, "Input Options"));
+        console.log('Render InputOptions');
+        return (
+        /* Note: Every component which consumes the context will be rerendered on application state changes. */
+        Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_1__["Consumer"], null, 
+        /* @link https://reactjs.org/docs/context.html#updating-context-from-a-nested-component */
+        ({ updateState }) => {
+            console.log('Re-render InputOptions');
+            return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null,
+                Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("label", null,
+                    "Message:",
+                    Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("input", { type: "text", placeholder: "Enter message here", onKeyUp: (e) => { updateState({ message: e.currentTarget.value }); } }))));
+        }));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./typescript/demo-app/no-state.tsx":
+/*!******************************************!*\
+  !*** ./typescript/demo-app/no-state.tsx ***!
+  \******************************************/
+/*! exports provided: NoState */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "NoState", function() { return NoState; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+
+/**
+ * Note: This component does not subscribe to the context, and will not re-render on state change.
+ */
+class NoState extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+    render() {
+        console.log('Render NoState');
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, "No state updates"));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./typescript/demo-app/provider.tsx":
+/*!******************************************!*\
+  !*** ./typescript/demo-app/provider.tsx ***!
+  \******************************************/
+/*! exports provided: Provider, Consumer, DemoAppProvider */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Provider", function() { return Provider; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Consumer", function() { return Consumer; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DemoAppProvider", function() { return DemoAppProvider; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _demo_app__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../demo-app */ "./typescript/demo-app.tsx");
+
+
+/* @link https://preactjs.com/guide/v10/context#createcontext */
+const { Provider, Consumer } = Object(preact__WEBPACK_IMPORTED_MODULE_0__["createContext"])(null);
+class DemoAppProvider extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+    constructor(props) {
+        super(props);
+        this.updateState = (newState) => {
+            this.setState(newState);
+        };
+        this.state = new _demo_app__WEBPACK_IMPORTED_MODULE_1__["DemoAppState"]();
+    }
+    render() {
+        /* The providers "value" consists of the application state and a reference to update it. */
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Provider, { value: { ...this.state, updateState: this.updateState } }, this.props.children));
+    }
+}
+
+
+/***/ }),
+
+/***/ "./typescript/demo-app/save.tsx":
+/*!**************************************!*\
+  !*** ./typescript/demo-app/save.tsx ***!
+  \**************************************/
+/*! exports provided: Save */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "Save", function() { return Save; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
+
+
+class Save extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+    saveDemoApp(state) {
+        // Send state to the server.
+        console.log('Saving DemoAppSate: ', JSON.stringify(state));
+    }
+    render() {
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_1__["Consumer"], null, (demoAppState) => (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("button", { type: "button", onClick: e => this.saveDemoApp(demoAppState) }, "Save"))));
     }
 }
 

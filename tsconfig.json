@@ -12,7 +12,7 @@
     "moduleResolution": "Node"
   },
   "include": [
-    "typescript/*.ts",
-    "typescript/*.tsx"
-, "typescript/demo-app/input-options.tsx"  ]
+    "typescript/**/*.ts",
+    "typescript/**/*.tsx",
+  ]
 }
