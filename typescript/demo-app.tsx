@@ -17,7 +17,7 @@ export class DemoAppState {
  * 
  * @link https://mariusschulz.com/blog/the-unknown-type-in-typescript 
  */
-class DemoApp extends Component<unknown, DemoAppState> {
+class DemoApp extends Component<unknown, unknown> {
 
     render() {
         return (
