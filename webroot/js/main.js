@@ -124,8 +124,8 @@ var n,l,u,i,t,r,o={},f=[],e=/acit|ex(?:s|g|n|p|$)|rph|grid|ows|mnc|ntw|ine[ch]|z
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "DemoAppState", function() { return DemoAppState; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-/* harmony import */ var _demo_app_input_options__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo-app/input-options */ "./typescript/demo-app/input-options.tsx");
-/* harmony import */ var _demo_app_input_options_mirror__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-app/input-options-mirror */ "./typescript/demo-app/input-options-mirror.tsx");
+/* harmony import */ var _demo_app_input_message__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./demo-app/input-message */ "./typescript/demo-app/input-message.tsx");
+/* harmony import */ var _demo_app_input_message_mirror__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./demo-app/input-message-mirror */ "./typescript/demo-app/input-message-mirror.tsx");
 /* harmony import */ var _demo_app_no_state__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./demo-app/no-state */ "./typescript/demo-app/no-state.tsx");
 /* harmony import */ var _demo_app_provider__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./demo-app/provider */ "./typescript/demo-app/provider.tsx");
 /* harmony import */ var _demo_app_save__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./demo-app/save */ "./typescript/demo-app/save.tsx");
@@ -151,8 +151,8 @@ class DemoAppState {
 class DemoApp extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
         return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_provider__WEBPACK_IMPORTED_MODULE_4__["DemoAppProvider"], null,
-            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_options__WEBPACK_IMPORTED_MODULE_1__["InputOptions"], null),
-            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_options_mirror__WEBPACK_IMPORTED_MODULE_2__["InputOptionsMirror"], null),
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_message__WEBPACK_IMPORTED_MODULE_1__["InputMessage"], null),
+            Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_input_message_mirror__WEBPACK_IMPORTED_MODULE_2__["InputMessageMirror"], null),
             Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_no_state__WEBPACK_IMPORTED_MODULE_3__["NoState"], null),
             Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_demo_app_save__WEBPACK_IMPORTED_MODULE_5__["Save"], null)));
     }
@@ -164,28 +164,58 @@ Object(preact__WEBPACK_IMPORTED_MODULE_0__["render"])(Object(preact__WEBPACK_IMP
 
 /***/ }),
 
-/***/ "./typescript/demo-app/input-options-mirror.tsx":
-/*!******************************************************!*\
-  !*** ./typescript/demo-app/input-options-mirror.tsx ***!
-  \******************************************************/
-/*! exports provided: InputOptionsMirror */
+/***/ "./typescript/demo-app/input-message-mirror-child.tsx":
+/*!************************************************************!*\
+  !*** ./typescript/demo-app/input-message-mirror-child.tsx ***!
+  \************************************************************/
+/*! exports provided: InputMessageMirrorChild */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputOptionsMirror", function() { return InputOptionsMirror; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputMessageMirrorChild", function() { return InputMessageMirrorChild; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
-/* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
 
-
-class InputOptionsMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+class InputMessageMirrorChild extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
-        console.log('Render InputOptionsMirror');
-        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_1__["Consumer"], null, ({ message }) => {
-            console.log('Re-render InputOptionsMirror');
-            return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null,
-                "Entered options: ",
-                Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("em", null, message ? message : 'Empty')));
+        console.log('Render InputMessageMirrorChild');
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null,
+            "Children of consumers are also updated (",
+            InputMessageMirrorChild.countUpdate++,
+            ")"));
+    }
+}
+InputMessageMirrorChild.countUpdate = 0;
+
+
+/***/ }),
+
+/***/ "./typescript/demo-app/input-message-mirror.tsx":
+/*!******************************************************!*\
+  !*** ./typescript/demo-app/input-message-mirror.tsx ***!
+  \******************************************************/
+/*! exports provided: InputMessageMirror */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputMessageMirror", function() { return InputMessageMirror; });
+/* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
+/* harmony import */ var _input_message_mirror_child__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./input-message-mirror-child */ "./typescript/demo-app/input-message-mirror-child.tsx");
+/* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
+
+
+
+class InputMessageMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+    render() {
+        console.log('Render InputMessageMirror');
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_2__["Consumer"], null, ({ message }) => {
+            console.log('Re-render InputMessageMirror');
+            return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
+                Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null,
+                    "Entered message: ",
+                    Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("em", null, message ? message : 'Empty')),
+                Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_input_message_mirror_child__WEBPACK_IMPORTED_MODULE_1__["InputMessageMirrorChild"], null)));
         }));
     }
 }
@@ -193,29 +223,29 @@ class InputOptionsMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"
 
 /***/ }),
 
-/***/ "./typescript/demo-app/input-options.tsx":
+/***/ "./typescript/demo-app/input-message.tsx":
 /*!***********************************************!*\
-  !*** ./typescript/demo-app/input-options.tsx ***!
+  !*** ./typescript/demo-app/input-message.tsx ***!
   \***********************************************/
-/*! exports provided: InputOptions */
+/*! exports provided: InputMessage */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputOptions", function() { return InputOptions; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "InputMessage", function() { return InputMessage; });
 /* harmony import */ var preact__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! preact */ "./node_modules/preact/dist/preact.module.js");
 /* harmony import */ var _provider__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./provider */ "./typescript/demo-app/provider.tsx");
 
 
-class InputOptions extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
+class InputMessage extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
-        console.log('Render InputOptions');
+        console.log('Render InputMessage');
         return (
         /* Note: Every component which consumes the context will be rerendered on application state changes. */
         Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_provider__WEBPACK_IMPORTED_MODULE_1__["Consumer"], null, 
         /* @link https://reactjs.org/docs/context.html#updating-context-from-a-nested-component */
         ({ updateState }) => {
-            console.log('Re-render InputOptions');
+            console.log('Re-render InputMessage');
             return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null,
                 Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("label", null,
                     "Message:",
@@ -245,7 +275,7 @@ __webpack_require__.r(__webpack_exports__);
 class NoState extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
     render() {
         console.log('Render NoState');
-        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("div", null, "No state updates"));
+        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null, "No updates to components without consumer interaction (NoState)"));
     }
 }
 

@@ -1,16 +1,16 @@
 import { Component, h } from "preact";
 import { Consumer } from "./provider";
 
-export class InputOptions extends Component {
+export class InputMessage extends Component {
     render() {
-        console.log('Render InputOptions');
+        console.log('Render InputMessage');
         return (
             /* Note: Every component which consumes the context will be rerendered on application state changes. */
             <Consumer>
                 {
                     /* @link https://reactjs.org/docs/context.html#updating-context-from-a-nested-component */
                     ({ updateState }) => {
-                        console.log('Re-render InputOptions');
+                        console.log('Re-render InputMessage');
                         return (
                             <div>
                                 <label>Message:

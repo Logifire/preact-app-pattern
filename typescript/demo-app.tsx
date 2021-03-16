@@ -1,6 +1,6 @@
 import { Component, h, render } from "preact";
-import { InputOptions } from "./demo-app/input-options";
-import { InputOptionsMirror } from "./demo-app/input-options-mirror";
+import { InputMessage } from "./demo-app/input-message";
+import { InputMessageMirror } from "./demo-app/input-message-mirror";
 import { NoState } from "./demo-app/no-state";
 import { DemoAppProvider } from "./demo-app/provider";
 import { Save } from "./demo-app/save";
@@ -22,8 +22,8 @@ class DemoApp extends Component<unknown, unknown> {
     render() {
         return (
             <DemoAppProvider>
-                <InputOptions />
-                <InputOptionsMirror />
+                <InputMessage />
+                <InputMessageMirror />
                 <NoState />
                 <Save />
             </DemoAppProvider>

@@ -7,9 +7,9 @@ export class NoState extends Component {
     render() {
         console.log('Render NoState');
         return (
-            <div>
-                No state updates
-            </div>
+            <p>
+                No updates to components without consumer interaction (NoState)
+            </p>
         )
     }
 }
