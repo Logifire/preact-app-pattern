@@ -1,9 +1,10 @@
 import { Component, h, render } from "preact";
 import { InputMessage } from "./demo-app/input-message";
-import { InputMessageMirror } from "./demo-app/input-message-mirror";
+import { InputMessageFunctionMirror } from "./demo-app/function-as-child/input-message-function-mirror";
 import { NoState } from "./demo-app/no-state";
 import { DemoAppProvider } from "./demo-app/provider";
 import { Save } from "./demo-app/save";
+import { InputMessagePropertyMirror } from "./demo-app/property/input-message-property-mirror";
 
 // Data model representing the application state.
 export class DemoAppState {
@@ -23,7 +24,8 @@ class DemoApp extends Component<unknown, unknown> {
         return (
             <DemoAppProvider>
                 <InputMessage />
-                <InputMessageMirror />
+                <InputMessageFunctionMirror />
+                <InputMessagePropertyMirror />
                 <NoState />
                 <Save />
             </DemoAppProvider>

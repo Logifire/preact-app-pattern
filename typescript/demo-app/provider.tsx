@@ -7,8 +7,8 @@ interface DemoAppContextContainer extends DemoAppState {
 }
 
 /* @link https://preactjs.com/guide/v10/context#createcontext */
-export const { Provider, Consumer } = createContext<DemoAppContextContainer>(null);
-
+export const DemoAppContext = createContext<DemoAppContextContainer>(null);
+export const { Provider, Consumer } = DemoAppContext;
 
 export class DemoAppProvider extends Component<unknown, DemoAppState> {
 

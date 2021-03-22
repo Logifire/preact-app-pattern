@@ -10,7 +10,7 @@ export class InputMessageMirrorChild extends Component<unknown, unknown> {
     render() {
         console.log('Render InputMessageMirrorChild');
         return (
-            <p>Children of consumers are also updated ({InputMessageMirrorChild.countUpdate++})</p>
+            <p>Children of consumers are also updated (Rendered {InputMessageMirrorChild.countUpdate++} times)</p>
         )
     }
 }

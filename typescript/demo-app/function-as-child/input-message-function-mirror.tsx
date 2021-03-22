@@ -1,19 +1,24 @@
 import { Component, Fragment, h } from "preact";
 import { InputMessageMirrorChild } from "./input-message-mirror-child";
-import { Consumer } from "./provider";
+import { Consumer } from "../provider";
 
-export class InputMessageMirror extends Component<unknown, unknown> {
+export class InputMessageFunctionMirror extends Component<unknown, unknown> {
     render() {
-        console.log('Render InputMessageMirror');
+        console.log('Render InputMessageFunctionMirror');
         return (
             <Consumer>
                 {
+                    /**
+                     * Function as child pattern.
+                     * 
+                     * @link https://reactjs.org/docs/render-props.html#using-props-other-than-render
+                     */
                     ({ message }) => {
-                        console.log('Re-render InputMessageMirror');
+                        console.log('Re-render InputMessageFunctionMirror');
                         return (
                             <Fragment>
                                 <p>
-                                    Entered message: <em>{message ? message : 'Empty'}</em>
+                                    (Function) Entered message: <em>{message ? message : 'Empty'}</em>
                                 </p>
                                 <InputMessageMirrorChild />
                             </Fragment>
