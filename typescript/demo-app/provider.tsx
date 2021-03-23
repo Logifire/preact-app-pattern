@@ -22,8 +22,13 @@ export class DemoAppProvider extends Component<unknown, DemoAppState> {
     }
 
     render() {
-        /* The providers "value" consists of the application state and a reference to update it. */
         return (
+            /**
+             * All consumers that are descendants of a Provider will re-render whenever 
+             * the Provider’s value prop changes.
+             * 
+             * @link https://reactjs.org/docs/context.html#contextprovider
+             */
             <Provider value={{ ...this.state, updateState: this.updateState }} >
                 {/* 
                     Note:   If you do an inline rendering of the components, 
