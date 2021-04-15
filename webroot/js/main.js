@@ -196,7 +196,7 @@ class InputMessageFunctionMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Co
             console.log('Re-render InputMessageFunctionMirror');
             return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
                 Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null,
-                    "(Function) Entered message: ",
+                    "(Function as child) Entered message: ",
                     Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("em", null, message ? message : 'Empty')),
                 Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(_input_message_mirror_child__WEBPACK_IMPORTED_MODULE_1__["InputMessageMirrorChild"], null)));
         }));
@@ -313,12 +313,16 @@ class InputMessagePropertyMirror extends preact__WEBPACK_IMPORTED_MODULE_0__["Co
         console.log('Render InputMessagePropertyMirror');
         return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(preact__WEBPACK_IMPORTED_MODULE_0__["Fragment"], null,
             Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("p", null,
-                "(Property) Entered message: ",
+                "(Property: contextType) Entered message: ",
                 Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])("em", null, this.context.message ? this.context.message : 'Empty'))));
     }
 }
 /**
- * This enables the consume behaviour.
+ * Using this property lets you consume the nearest current value of that Context type using this.context.
+ * Note: You can only subscribe to a single context using this API. If you need to read more than one,
+ * use function as child.
+ *
+ * @link https://reactjs.org/docs/context.html#classcontexttype
  */
 InputMessagePropertyMirror.contextType = _provider__WEBPACK_IMPORTED_MODULE_1__["DemoAppContext"];
 
@@ -354,8 +358,14 @@ class DemoAppProvider extends preact__WEBPACK_IMPORTED_MODULE_0__["Component"] {
         this.state = new _demo_app__WEBPACK_IMPORTED_MODULE_1__["DemoAppState"]();
     }
     render() {
-        /* The providers "value" consists of the application state and a reference to update it. */
-        return (Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Provider, { value: { ...this.state, updateState: this.updateState } }, this.props.children));
+        return (
+        /**
+         * All consumers that are descendants of a Provider will re-render whenever
+         * the Provider’s value prop changes.
+         *
+         * @link https://reactjs.org/docs/context.html#contextprovider
+         */
+        Object(preact__WEBPACK_IMPORTED_MODULE_0__["h"])(Provider, { value: { ...this.state, updateState: this.updateState } }, this.props.children));
     }
 }
 

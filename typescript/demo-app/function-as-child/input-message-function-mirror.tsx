@@ -18,7 +18,7 @@ export class InputMessageFunctionMirror extends Component<unknown, unknown> {
                         return (
                             <Fragment>
                                 <p>
-                                    (Function) Entered message: <em>{message ? message : 'Empty'}</em>
+                                    (Function as child) Entered message: <em>{message ? message : 'Empty'}</em>
                                 </p>
                                 <InputMessageMirrorChild />
                             </Fragment>

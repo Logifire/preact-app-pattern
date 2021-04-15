@@ -17,7 +17,7 @@ export class InputMessagePropertyMirror extends Component<unknown, unknown> {
         return (
             <Fragment>
                 <p>
-                    (Property) Entered message: <em>{this.context.message ? this.context.message : 'Empty'}</em>
+                    (Property: contextType) Entered message: <em>{this.context.message ? this.context.message : 'Empty'}</em>
                 </p>
             </Fragment>
         )
