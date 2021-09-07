@@ -17,6 +17,10 @@ export class DemoAppProvider extends Component<unknown, DemoAppState> {
         this.state = new DemoAppState();
     }
 
+    /**
+     * Note: Wrapping `setState` to get specific argument type hint and bind the method
+     * to this component.  
+     */
     private updateState = (newState: Partial<DemoAppState>): void => {
         this.setState(newState);
     }
